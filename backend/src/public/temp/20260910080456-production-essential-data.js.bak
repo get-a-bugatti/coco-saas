@@ -1,0 +1,348 @@
+"use strict";
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    // 1. Insert Complete System Permissions
+    await queryInterface.bulkInsert(
+      "permissions",
+      [
+        // Organization Permissions
+        {
+          id: "p0000000-0000-0000-0000-000000000001",
+          name: "organization:read",
+          description: "View organization details",
+          scope: "organization",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "p0000000-0000-0000-0000-000000000002",
+          name: "organization:update",
+          description: "Update organization details",
+          scope: "organization",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "p0000000-0000-0000-0000-000000000003",
+          name: "organization:delete",
+          description: "Delete organization account",
+          scope: "organization",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+
+        // Member Permissions
+        {
+          id: "p0000000-0000-0000-0000-000000000004",
+          name: "member:read",
+          description: "View members list in workspace",
+          scope: "organization",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "p0000000-0000-0000-0000-000000000005",
+          name: "member:invite",
+          description: "Invite members to workspace",
+          scope: "organization",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "p0000000-0000-0000-0000-000000000006",
+          name: "member:remove",
+          description: "Remove members from workspace",
+          scope: "organization",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+
+        // Project Permissions
+        {
+          id: "p0000000-0000-0000-0000-000000000010",
+          name: "project:read",
+          description: "View project details",
+          scope: "project",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "p0000000-0000-0000-0000-000000000011",
+          name: "project:create",
+          description: "Create new projects",
+          scope: "project",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "p0000000-0000-0000-0000-000000000012",
+          name: "project:update",
+          description: "Edit project details",
+          scope: "project",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "p0000000-0000-0000-0000-000000000013",
+          name: "project:delete",
+          description: "Delete projects",
+          scope: "project",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+
+        // Task Permissions
+        {
+          id: "p0000000-0000-0000-0000-000000000020",
+          name: "task:read",
+          description: "View tasks",
+          scope: "project",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "p0000000-0000-0000-0000-000000000021",
+          name: "task:create",
+          description: "Create tasks",
+          scope: "project",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "p0000000-0000-0000-0000-000000000022",
+          name: "task:update",
+          description: "Update task details",
+          scope: "project",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "p0000000-0000-0000-0000-000000000023",
+          name: "task:delete",
+          description: "Delete tasks",
+          scope: "project",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "p0000000-0000-0000-0000-000000000024",
+          name: "task:assign",
+          description: "Assign tasks",
+          scope: "project",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+
+        // Team Permissions
+        {
+          id: "p0000000-0000-0000-0000-000000000030",
+          name: "team:read",
+          description: "View team details",
+          scope: "team",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "p0000000-0000-0000-0000-000000000031",
+          name: "team:create",
+          description: "Create new teams",
+          scope: "team",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "p0000000-0000-0000-0000-000000000032",
+          name: "team:update",
+          description: "Update team details",
+          scope: "team",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "p0000000-0000-0000-0000-000000000033",
+          name: "team:delete",
+          description: "Delete teams",
+          scope: "team",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+      ],
+      { ignoreDuplicates: true }
+    );
+
+    // 2. Insert Universal System Default Roles
+    await queryInterface.bulkInsert(
+      "roles",
+      [
+        {
+          id: "r0000000-0000-0000-0000-000000000001",
+          organization_id: null,
+          name: "Organization Owner",
+          slug: "org_owner",
+          scope: "organization",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "r0000000-0000-0000-0000-000000000002",
+          organization_id: null,
+          name: "Organization Member",
+          slug: "org_member",
+          scope: "organization",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "r0000000-0000-0000-0000-000000000003",
+          organization_id: null,
+          name: "Project Lead",
+          slug: "project_lead",
+          scope: "project",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "r0000000-0000-0000-0000-000000000004",
+          organization_id: null,
+          name: "Project Contributor",
+          slug: "project_contributor",
+          scope: "project",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "r0000000-0000-0000-0000-000000000005",
+          organization_id: null,
+          name: "Team Lead",
+          slug: "team_lead",
+          scope: "team",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: "r0000000-0000-0000-0000-000000000006",
+          organization_id: null,
+          name: "Team Member",
+          slug: "team_member",
+          scope: "team",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+      ],
+      { ignoreDuplicates: true }
+    );
+
+    // 3. Link Default Roles & Permissions
+    await queryInterface.bulkInsert(
+      "role_permissions",
+      [
+        // Org Owner permissions
+        {
+          role_id: "r0000000-0000-0000-0000-000000000001",
+          permission_id: "p0000000-0000-0000-0000-000000000001",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000001",
+          permission_id: "p0000000-0000-0000-0000-000000000002",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000001",
+          permission_id: "p0000000-0000-0000-0000-000000000003",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000001",
+          permission_id: "p0000000-0000-0000-0000-000000000004",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000001",
+          permission_id: "p0000000-0000-0000-0000-000000000005",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000001",
+          permission_id: "p0000000-0000-0000-0000-000000000006",
+        },
+
+        // Org Member permissions
+        {
+          role_id: "r0000000-0000-0000-0000-000000000002",
+          permission_id: "p0000000-0000-0000-0000-000000000001",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000002",
+          permission_id: "p0000000-0000-0000-0000-000000000004",
+        },
+
+        // Project Lead permissions
+        {
+          role_id: "r0000000-0000-0000-0000-000000000003",
+          permission_id: "p0000000-0000-0000-0000-000000000010",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000003",
+          permission_id: "p0000000-0000-0000-0000-000000000011",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000003",
+          permission_id: "p0000000-0000-0000-0000-000000000012",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000003",
+          permission_id: "p0000000-0000-0000-0000-000000000013",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000003",
+          permission_id: "p0000000-0000-0000-0000-000000000020",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000003",
+          permission_id: "p0000000-0000-0000-0000-000000000021",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000003",
+          permission_id: "p0000000-0000-0000-0000-000000000022",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000003",
+          permission_id: "p0000000-0000-0000-0000-000000000023",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000003",
+          permission_id: "p0000000-0000-0000-0000-000000000024",
+        },
+
+        // Team Lead permissions
+        {
+          role_id: "r0000000-0000-0000-0000-000000000005",
+          permission_id: "p0000000-0000-0000-0000-000000000030",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000005",
+          permission_id: "p0000000-0000-0000-0000-000000000031",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000005",
+          permission_id: "p0000000-0000-0000-0000-000000000032",
+        },
+        {
+          role_id: "r0000000-0000-0000-0000-000000000005",
+          permission_id: "p0000000-0000-0000-0000-000000000033",
+        },
+
+        // Team Member permissions
+        {
+          role_id: "r0000000-0000-0000-0000-000000000006",
+          permission_id: "p0000000-0000-0000-0000-000000000030",
+        },
+      ],
+      { ignoreDuplicates: true }
+    );
+  },
+
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete("role_permissions", null, {});
+    await queryInterface.bulkDelete("roles", { organization_id: null }, {});
+    await queryInterface.bulkDelete("permissions", null, {});
+  },
+};
